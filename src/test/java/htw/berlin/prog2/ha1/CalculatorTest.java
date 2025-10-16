@@ -106,5 +106,86 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+
+
+    // Beispiel Übung:
+    // @Test
+    // @DisplayName("should calculate integer square root")
+    // void testSquareRootWithIntegerResult() {
+    // Calculator calc = new Calculator();
+
+    //    calc.pressDigitKey(2);
+    //    calc.pressDigitKey(5);
+    //    calc.pressUnaryOperationKey("√");
+    //    calc.pressEqualsKey();
+
+    //    String expected = "5";
+    //    String actual = calc.readScreen();
+
+    //    assertEquals(expected, actual);
+
+    // }
+
+    @Test
+    @DisplayName("should multiplicate 2 negative numbers with a positive result")
+    void testMultiplicationOfNegativeNumbers() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "8";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("substraction of a negative number, inversion operation")
+    void testSubtractionOfNegativeNumber() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(4);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+
+        String expected = "6";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should display error inversion from 0")
+    void testInversionZero() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+        calc.pressEqualsKey();
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    @DisplayName("should round up number by infinite periodic ending")
+    void testRoundingUp() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "0.16666667";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
 }
 
