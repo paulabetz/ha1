@@ -80,11 +80,23 @@ public class Calculator {
             case "1/x" -> 1 / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        //screen = Double.toString(result);
+        //if(screen.equals("NaN")) screen = "Error";
+        //if(screen.equals("Infinity")) screen = "Error";
+        //if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
+        if (Double.isInfinite(result) || Double.isNaN(result)) {
+            screen = "Error";
+            return;
+        }
+        result = Math.round(result * 1e8) / 1e8;
+
+        screen = Double.toString(result);
+        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
+        if (screen.length() > 11) screen = screen.substring(0, 10);
     }
+
+
 
     /**
      * Empfängt den Befehl der gedrückten Dezimaltrennzeichentaste, im Englischen üblicherweise "."
@@ -125,9 +137,17 @@ public class Calculator {
             case "/" -> latestValue / Double.parseDouble(screen);
             default -> throw new IllegalArgumentException();
         };
-        screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
+
+        if (Double.isInfinite(result) || Double.isNaN(result)) {
+            screen = "Error";
+            return;
+        }
+        result = Math.round(result * 1e8) / 1e8;
+
+       screen = Double.toString(result);
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-    }
+        if (screen.length() > 11) screen = screen.substring(0, 10);
+        }
+
+
 }

@@ -109,22 +109,21 @@ class CalculatorTest {
 
 
     // Beispiel Übung:
-    // @Test
-    // @DisplayName("should calculate integer square root")
-    // void testSquareRootWithIntegerResult() {
-    // Calculator calc = new Calculator();
+    @Test
+    @DisplayName("should calculate integer square root")
+    void testSquareRootWithIntegerResult() {
+    Calculator calc = new Calculator();
 
-    //    calc.pressDigitKey(2);
-    //    calc.pressDigitKey(5);
-    //    calc.pressUnaryOperationKey("√");
-    //    calc.pressEqualsKey();
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("√");
 
-    //    String expected = "5";
-    //    String actual = calc.readScreen();
+        String expected = "5";
+        String actual = calc.readScreen();
 
-    //    assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
-    // }
+     }
 
     @Test
     @DisplayName("should multiplicate 2 negative numbers with a positive result")
@@ -165,7 +164,6 @@ class CalculatorTest {
         Calculator calc = new Calculator();
         calc.pressDigitKey(0);
         calc.pressUnaryOperationKey("1/x");
-        calc.pressEqualsKey();
 
         String expected = "Error";
         String actual = calc.readScreen();
